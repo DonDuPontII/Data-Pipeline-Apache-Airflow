@@ -7,31 +7,31 @@
 - Two source dataset types (both are JSON) are stored in Amazon S3:
   - Log files refer to user application activity
   - Song files inform what users are listening to 
-- Data warehouse lives in Amazon Redishift
+- Data warehouse lives in Amazon Redshift
 
 ### Files contained in the project
 - SQL scripts
   - Create_tables.sql
     - Designs schemas for staging, dimension, and fact tables
   - Sql_queries.py
-    - A class containing all sql statements to populate the dimension and fact tables
+    - A class containing all SQL statements to populate the dimension and fact tables
 - Customized operators that connect to a Redshift cluster with a Postgres hook
   - Stage_redshift.py
     - Clears data from destination Redshift table if specified
     - Copies data from S3 to Redshift
   - Load_fact.py
     - Truncates data from destination Redshift table if specified
-    - Load data into fact table
+    - Load data into the fact table
   - Load_dimension.py
     - Truncates data from destination Redshift table if specified
-    - Load data into dimension table
+    - Load data into the dimension table
   - Data_quality.py
     - Run data quality check on primary key duplication and if unwanted null values exist 
     - If duplication or unwanted null values exist, raise an error, retry, and eventually fail
 - DAG
   - Udac_example_dag.py
     - Defines default arguments for DAG
-    - Establishes scheduler to be ran hourly for automation
+    - Establishes scheduler to run hourly for automation
     - Configures customized operators for each task
     - Maps the task dependencies
 
